@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 # addModRecord.py
 
 import commonDlgs
@@ -11,9 +12,9 @@ class AgregarEditarRegistroDialog(wx.Dialog):
     """
 
     #----------------------------------------------------------------------
-    def __init__(self, row=None, title="Add", addRecord=True):
+    def __init__(self, row=None, title="Añadir", addRecord=True):
         """Constructor"""
-        wx.Dialog.__init__(self, None, title="%s Record" % title)
+        wx.Dialog.__init__(self, None, title="%s Registro" % title)
         self.addRecord = addRecord
         self.selectedRow = row
         if row:
@@ -33,18 +34,15 @@ class AgregarEditarRegistroDialog(wx.Dialog):
         btnSizer = wx.BoxSizer(wx.HORIZONTAL)
                 
         # create some widgets
-        lbl = wx.StaticText(self, label="New Record")
-        lbl.SetFont(font)
-        mainSizer.Add(lbl, 0, wx.CENTER)
         
         font = wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD) 
-        titleLbl = wx.StaticText(self, label="Title:", size=size)
+        titleLbl = wx.StaticText(self, label="Título:", size=size)
         titleLbl.SetFont(font)
         self.titleTxt = wx.TextCtrl(self, value=bTitle)
         mainSizer.Add(self.rowBuilder([titleLbl, self.titleTxt]), 
                       0, wx.EXPAND)
         
-        authorLbl = wx.StaticText(self, label="Author:", size=size)
+        authorLbl = wx.StaticText(self, label="Autor:", size=size)
         authorLbl.SetFont(font)
         authorSizer.Add(authorLbl, 0, wx.ALL, 5)
         self.authorFirstTxt = wx.TextCtrl(self, value=fName)
@@ -59,16 +57,16 @@ class AgregarEditarRegistroDialog(wx.Dialog):
         mainSizer.Add(self.rowBuilder([isbnLbl, self.isbnTxt]),
                       0, wx.EXPAND)
         
-        publisherLbl = wx.StaticText(self, label="Publisher:", size=size)
+        publisherLbl = wx.StaticText(self, label="Editor:", size=size)
         publisherLbl.SetFont(font)
         self.publisherTxt = wx.TextCtrl(self, value=publisher)
         mainSizer.Add(self.rowBuilder([publisherLbl, self.publisherTxt]),
                       0, wx.EXPAND)
         
-        okBtn = wx.Button(self, label="%s Book" % title)
+        okBtn = wx.Button(self, label="%s Libro" % title)
         okBtn.Bind(wx.EVT_BUTTON, self.onRecord)
         btnSizer.Add(okBtn, 0, wx.ALL, 5)
-        cancelBtn = wx.Button(self, label="Close")
+        cancelBtn = wx.Button(self, label="Cerrar")
         cancelBtn.Bind(wx.EVT_BUTTON, self.onClose)
         btnSizer.Add(cancelBtn, 0, wx.ALL, 5)
         
@@ -88,8 +86,8 @@ class AgregarEditarRegistroDialog(wx.Dialog):
         publisher = self.publisherTxt.GetValue()
         
         if fName == "" or title == "":
-            commonDlgs.showMessageDlg("Author and Title are Required!",
-                                      "Error")
+            commonDlgs.showMessageDlg("El Autor y el título es requerido!",
+                                      "Error!")
             return
             
         if "-" in isbn:
@@ -112,8 +110,8 @@ class AgregarEditarRegistroDialog(wx.Dialog):
         controller.addRecord(data)
         
         # show dialog upon completion
-        commonDlgs.showMessageDlg("Book Added",
-                                  "Success!", wx.ICON_INFORMATION)
+        commonDlgs.showMessageDlg("Libro añadido correctamente!",
+                                  "Correcto!", wx.ICON_INFORMATION)
         
         # clear dialog so we can add another book
         for child in self.GetChildren():
@@ -133,7 +131,7 @@ class AgregarEditarRegistroDialog(wx.Dialog):
         authorDict, bookDict = self.getData()
         comboDict = dict(authorDict.items() + bookDict.items())
         controller.editRecord(self.selectedRow.id, comboDict)
-        commonDlgs.showMessageDlg("Book Edited Successfully!", "Success",
+        commonDlgs.showMessageDlg("Libro Editado Satisfactoriamente!", "Correcto!",
                                   wx.ICON_INFORMATION)
         self.Destroy()
         

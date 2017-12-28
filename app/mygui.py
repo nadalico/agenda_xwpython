@@ -9,7 +9,6 @@
 
 import wx
 import wx.xrc
-import wx.dataview
 
 ###########################################################################
 ## Class BookFrame
@@ -29,20 +28,26 @@ class BookFrame ( wx.Frame ):
 		self.addRecordBtn = wx.Button( self, wx.ID_ANY, u"Añadir", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer9.Add( self.addRecordBtn, 0, wx.ALIGN_BOTTOM|wx.ALL, 5 )
 		
-		self.list_ctrl = wx.dataview.DataViewListCtrl( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer9.Add( self.list_ctrl, 0, wx.ALL, 5 )
+		self.editRecordBtn = wx.Button( self, wx.ID_ANY, u"Editar", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.editRecordBtn, 0, wx.ALIGN_BOTTOM|wx.ALL, 5 )
 		
-		self.m_button5 = wx.Button( self, wx.ID_ANY, u"Editar", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer9.Add( self.m_button5, 0, wx.ALIGN_BOTTOM|wx.ALL, 5 )
-		
-		self.m_button6 = wx.Button( self, wx.ID_ANY, u"Eliminar", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer9.Add( self.m_button6, 0, wx.ALIGN_BOTTOM|wx.ALL, 5 )
+		self.deleteRecordBtn = wx.Button( self, wx.ID_ANY, u"Eliminar", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.deleteRecordBtn, 0, wx.ALIGN_BOTTOM|wx.ALL, 5 )
 		
 		self.showAllBtn = wx.Button( self, wx.ID_ANY, u"Mostrar Todos", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer9.Add( self.showAllBtn, 0, wx.ALIGN_BOTTOM|wx.ALL, 5 )
 		
 		
-		btnSizer.Add( bSizer9, 1, wx.ALIGN_CENTER|wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+		btnSizer.Add( bSizer9, 1, wx.ALIGN_BOTTOM|wx.ALIGN_CENTER, 5 )
+		
+		categoriesChoices = [ u"Autor", u"Título", u"ISBN", u"Editor" ]
+		self.categories = wx.ComboBox( self, wx.ID_ANY, u"Autor", wx.DefaultPosition, wx.DefaultSize, categoriesChoices, 0 )
+		btnSizer.Add( self.categories, 0, wx.ALL, 5 )
+		
+		self.search = wx.SearchCtrl( self, wx.ID_ANY, u"Buscar", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.search.ShowSearchButton( True )
+		self.search.ShowCancelButton( False )
+		btnSizer.Add( self.search, 0, wx.ALL, 5 )
 		
 		
 		self.SetSizer( btnSizer )
@@ -60,7 +65,11 @@ class BookFrame ( wx.Frame ):
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
-		self.showAllBtn.Bind( wx.EVT_BUTTON, self.onShowAllRecord )
+		self.addRecordBtn.Bind( wx.EVT_BUTTON, self.onAgregarRegistro )
+		self.editRecordBtn.Bind( wx.EVT_BUTTON, self.onEditarRegistro )
+		self.deleteRecordBtn.Bind( wx.EVT_BUTTON, self.onEliminarRegistro )
+		self.showAllBtn.Bind( wx.EVT_BUTTON, self.onMostrarTodosRegistros )
+		self.search.Bind( wx.EVT_TEXT, self.onBuscar )
 		self.Bind( wx.EVT_MENU, self.onQuit, id = self.salir.GetId() )
 	
 	def __del__( self ):
@@ -68,7 +77,19 @@ class BookFrame ( wx.Frame ):
 	
 	
 	# Virtual event handlers, overide them in your derived class
-	def onShowAllRecord( self, event ):
+	def onAgregarRegistro( self, event ):
+		event.Skip()
+	
+	def onEditarRegistro( self, event ):
+		event.Skip()
+	
+	def onEliminarRegistro( self, event ):
+		event.Skip()
+	
+	def onMostrarTodosRegistros( self, event ):
+		event.Skip()
+	
+	def onBuscar( self, event ):
 		event.Skip()
 	
 	def onQuit( self, event ):
