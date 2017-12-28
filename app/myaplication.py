@@ -30,7 +30,7 @@ class MyApplication(BookFrame):
         """
         Añadimos registro en la base de datos
         """
-        dlg = AgregarEditarRegistro.AgregarEditarRegistroDialog()
+        dlg = AgregarEditarRegistro.AgregarEditar()
         dlg.ShowModal()
         dlg.Destroy()
         self.mostrarTodosRegistros()
@@ -44,7 +44,7 @@ class MyApplication(BookFrame):
         if selectedRow == None:
             commonDlgs.showMessageDlg("Fila no seleccionada!", "Error")
             return
-        dlg = AgregarEditarRegistro.AgregarEditarRegistroDialog(selectedRow, title="Modificar",
+        dlg = AgregarEditarRegistro.AgregarEditar(selectedRow, title="Modificar",
                                            addRecord=False)
         dlg.ShowModal()
         dlg.Destroy()
