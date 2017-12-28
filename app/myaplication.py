@@ -10,7 +10,7 @@ class MyApplication(BookFrame):
     def __init__(self, *args, **kargs):
         BookFrame.__init__(self, *args, **kargs)
 
-        ##**put here all your Bind()**
+        ##**put here all your Bind()** 
 
         try:
             self.bookResults = controller.getAllRecords()
@@ -69,6 +69,7 @@ class MyApplication(BookFrame):
         Searches database based on the user's filter choice and keyword
         """
         filterChoice = self.categories.GetValue()
+        print filterChoice
         keyword = self.search.GetValue()
         print "%s %s" % (filterChoice, keyword)
         self.bookResults = controller.searchRecords(filterChoice, keyword)

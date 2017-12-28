@@ -40,7 +40,7 @@ class BookFrame ( wx.Frame ):
 		
 		btnSizer.Add( bSizer9, 1, wx.ALIGN_BOTTOM|wx.ALIGN_CENTER, 5 )
 		
-		categoriesChoices = [ u"Autor", u"Título", u"ISBN", u"Editor" ]
+		categoriesChoices = [ u"Autor", u"Titulo", u"ISBN", u"Editor" ]
 		self.categories = wx.ComboBox( self, wx.ID_ANY, u"Autor", wx.DefaultPosition, wx.DefaultSize, categoriesChoices, 0 )
 		btnSizer.Add( self.categories, 0, wx.ALL, 5 )
 		

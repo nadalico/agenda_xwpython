@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # controller.py
 from model import Book, Person, OlvBook
 from sqlalchemy import create_engine
@@ -103,7 +104,7 @@ def searchRecords(filterChoice, keyword):
     given by the user
     """
     session = connectToDatabase()
-    if filterChoice == "Author":
+    if filterChoice == "Autor":
         qry = session.query(Person)
         result = qry.filter(Person.first_name.contains('%s' % keyword)).all()
         records = []
@@ -112,7 +113,7 @@ def searchRecords(filterChoice, keyword):
                 records.append(book)
         result = records
         print result
-    elif filterChoice == "Title":
+    elif filterChoice == "Titulo":
         qry = session.query(Book)
         result = qry.filter(Book.title.contains('%s' % keyword)).all()
     elif filterChoice == "ISBN":
