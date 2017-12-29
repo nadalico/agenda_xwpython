@@ -10,6 +10,8 @@
 import wx
 import wx.xrc
 
+ID_ACERCA_DE = 1000
+
 ###########################################################################
 ## Class BookFrame
 ###########################################################################
@@ -59,6 +61,12 @@ class BookFrame ( wx.Frame ):
 		
 		self.m_menubar1.Append( self.inicio, u"Inicio" ) 
 		
+		self.ayuda = wx.Menu()
+		self.acercaDe = wx.MenuItem( self.ayuda, ID_ACERCA_DE, u"Acerca De...", wx.EmptyString, wx.ITEM_NORMAL )
+		self.ayuda.Append( self.acercaDe )
+		
+		self.m_menubar1.Append( self.ayuda, u"Ayuda" ) 
+		
 		self.SetMenuBar( self.m_menubar1 )
 		
 		
@@ -71,6 +79,7 @@ class BookFrame ( wx.Frame ):
 		self.showAllBtn.Bind( wx.EVT_BUTTON, self.onMostrarTodosRegistros )
 		self.search.Bind( wx.EVT_TEXT, self.onBuscar )
 		self.Bind( wx.EVT_MENU, self.onQuit, id = self.salir.GetId() )
+		self.Bind( wx.EVT_MENU, self.onAcercaDe, id = self.acercaDe.GetId() )
 	
 	def __del__( self ):
 		pass
@@ -94,5 +103,44 @@ class BookFrame ( wx.Frame ):
 	
 	def onQuit( self, event ):
 		event.Skip()
+	
+	def onAcercaDe( self, event ):
+		event.Skip()
+	
+
+###########################################################################
+## Class FrameAcercaDe
+###########################################################################
+
+class FrameAcercaDe ( wx.Frame ):
+	
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Acerca de...", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer3 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		
+		bSizer3.Add( ( 30, 0), 1, wx.EXPAND, 5 )
+		
+		self.m_bitmap1 = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap( u"icons/icon_acerca_de.bmp", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer3.Add( self.m_bitmap1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		
+		self.m_staticText1 = wx.StaticText( self, wx.ID_ANY, u"software Realizado por Javier Nadal", wx.Point( -1,-1 ), wx.DefaultSize, 0 )
+		self.m_staticText1.Wrap( -1 )
+		bSizer3.Add( self.m_staticText1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		
+		
+		bSizer3.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+		
+		
+		self.SetSizer( bSizer3 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+	
+	def __del__( self ):
+		pass
 	
 

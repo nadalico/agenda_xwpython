@@ -4,6 +4,7 @@ import AgregarEditarRegistro
 import commonDlgs
 import controller
 from mygui import BookFrame
+from mygui import FrameAcercaDe
 from ObjectListView import ObjectListView, ColumnDefn
 
 class MyApplication(BookFrame):
@@ -18,7 +19,7 @@ class MyApplication(BookFrame):
             self.bookResults = []
 
         #listado libros sin crear objeto desde la interfaz grafica
-        self.bookResultsOlv = ObjectListView(self, style=wx.LC_REPORT|wx.SUNKEN_BORDER, size = wx.Size( 912,300 ),)
+        self.bookResultsOlv = ObjectListView(self, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
         self.bookResultsOlv.SetEmptyListMsg("Registros no encontrados")
         self.setBooks()
 
@@ -68,6 +69,7 @@ class MyApplication(BookFrame):
         """
         Searches database based on the user's filter choice and keyword
         """
+        print "entramos en onbuscar"
         filterChoice = self.categories.GetValue()
         print filterChoice
         keyword = self.search.GetValue()
@@ -95,14 +97,28 @@ class MyApplication(BookFrame):
         self.bookResults = controller.getAllRecords()
         self.setBooks()
 
+    ###################
+    # Menu aplicacion #
+    ###################
+
     #salir de la aplicacion desde el menu
     def onQuit(self, e):
         self.Close()
 
+    def onAcercaDe(self, e):
+        print "acerca de"
+        aframe = FrameAcercaDe(None)
+        aframe.Centre()
+        aframe.Show()
+
+    #######################
+    # Fin Menu aplicacion #
+    #######################
 
 if __name__ == '__main__':
 
     app = wx.PySimpleApp()
     frame = MyApplication(None)
+    #frame.ShowFullScreen(True)
     frame.Show()
     app.MainLoop()   

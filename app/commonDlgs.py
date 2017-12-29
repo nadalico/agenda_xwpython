@@ -9,3 +9,5 @@ def showMessageDlg(message, caption, flag=wx.ICON_ERROR):
                            caption=caption, style=flag)
     msg.ShowModal()
     msg.Destroy()
+	
+
