@@ -108,7 +108,7 @@ class PanelLibro(PanelLibrosUI):
       
       self.bookResults = controller.getAllRecords()
       self.setBooks()
-
+#######################################################################################
 """
 Clase panel pag dos
 """
@@ -117,11 +117,39 @@ class PanelPaginaDos(PanelPag2UI):
     PanelPag2UI.__init__(self, parent)
     self.parent = parent
 
+    try:
+        self.bookResults = controller.getAllRecords()
+    except:
+        self.bookResults = []
+
+    #listado libros sin crear objeto desde la interfaz grafica
+    self.bookResultsOlv = ObjectListView(self, style=wx.LC_REPORT|wx.SUNKEN_BORDER|wx.TE_CENTRE, size=(850,250))
+    self.bookResultsOlv.SetEmptyListMsg("Registros no encontrados")
+    self.bookResultsOlv.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.onDoubleClick)
+    self.setBooks()
+
+  def setBooks(self):
+      self.bookResultsOlv.SetColumns([
+          ColumnDefn("Título", "left", 350, "title"),
+          ColumnDefn("Autor", "left", 150, "author"),
+          ColumnDefn("ISBN", "right", 150, "isbn"),
+          ColumnDefn("Editor", "left", 150, "publisher")
+      ])
+      self.bookResultsOlv.SetObjects(self.bookResults)
+
+  def onDoubleClick(self, event):
+    #evento para mostrar ventana editar registro
+    selectedRow = self.bookResultsOlv.GetSelectedObject()
+    dlg = AgregarEditarRegistro.AgregarEditar(selectedRow, title="Modificar",addRecord=False)
+    dlg.ShowModal()
+    dlg.Destroy()
+    self.mostrarTodosRegistros()
+
   def onBtnAtras( self, event ):
-    print "prueba"
     parentShowDos = PanelPrincipal(parent=self.parent)
     parentShowDos.Show()
     self.Destroy()
+######################################################################################
 
 """
 Clase que hereda componentes de la UI del panel principal de la aplicacion

@@ -256,12 +256,35 @@ class PanelPag2UI ( wx.Panel ):
 		
 		bSizer56 = wx.BoxSizer( wx.VERTICAL )
 		
+		bSizer16 = wx.BoxSizer( wx.VERTICAL )
+		
+		
+		bSizer16.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+		
+		
+		bSizer56.Add( bSizer16, 1, wx.EXPAND, 5 )
+		
+		bSizer15 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		bSizer17 = wx.BoxSizer( wx.HORIZONTAL )
+		
 		self.m_staticText11 = wx.StaticText( self, wx.ID_ANY, u"Pagina Dos", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText11.Wrap( -1 )
-		bSizer56.Add( self.m_staticText11, 0, wx.ALL, 5 )
+		bSizer17.Add( self.m_staticText11, 0, wx.ALL|wx.ALIGN_BOTTOM, 5 )
+		
+		
+		bSizer15.Add( bSizer17, 1, wx.ALIGN_BOTTOM|wx.EXPAND, 5 )
+		
+		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
 		
 		self.BtnAtras = wx.Button( self, wx.ID_ANY, u"Atras", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer56.Add( self.BtnAtras, 0, wx.ALL, 5 )
+		bSizer18.Add( self.BtnAtras, 0, wx.ALIGN_RIGHT|wx.TOP|wx.LEFT, 5 )
+		
+		
+		bSizer15.Add( bSizer18, 0, wx.ALIGN_BOTTOM, 5 )
+		
+		
+		bSizer56.Add( bSizer15, 1, wx.EXPAND, 5 )
 		
 		
 		self.SetSizer( bSizer56 )
